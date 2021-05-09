@@ -1,0 +1,42 @@
+﻿@model Project_Gym_Asp_Net.Models.Category
+@{
+    ViewData["Title"] = "CategoryExercise";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Category Exercise</h1>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-active">
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var item in Model.Exercises)
+    {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ExerciseName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CountApproach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Repeats)
+            </td>*@
+            <td class="text-right">
+                <a class="btn btn-sm btn-outline-primary" asp-action="EditExercise" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" asp-action="DeleteExercise" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
