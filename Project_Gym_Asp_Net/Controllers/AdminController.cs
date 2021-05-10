@@ -10,7 +10,7 @@ using Project_Gym_Asp_Net.ViewModels;
 
 namespace Project_Gym_Asp_Net.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class AdminController: Controller
     {
         UserManager<User> userManager;

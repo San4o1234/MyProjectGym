@@ -35,7 +35,7 @@ namespace Project_Gym_Asp_Net.Controllers
             if (ModelState.IsValid)
             {
 
-                //var user = await _userManager.FindByNameAsync(model.Email);
+                //var user = await _userManager.FindByEmailAsync(model.Email);
                 //if (user != null)
                 //{
                 //    if (!await _userManager.IsEmailConfirmedAsync(user))
@@ -45,8 +45,9 @@ namespace Project_Gym_Asp_Net.Controllers
                 //    }
                 //}
 
-                // Login в identity подивитися як писати.
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                // Login в identity подивитися як писати..
+                User user = await _userManager.FindByEmailAsync(model.Email);
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
