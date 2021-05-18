@@ -1,0 +1,62 @@
+﻿@model Project_Gym_Asp_Net.Models.User
+@using Project_Gym_Asp_Net.Models
+@{
+    ViewData["Title"] = "DetailsUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body style="background-image: url(http://www.glasgiven.com/site/wp-content/uploads/2017/09/PR-Better-Gym-Interior-3.jpg);
+        background-size: 100%">
+    <div class="container" style="margin-top: 10px; font-weight: 900;">
+
+        <h1>Details User: @Model.UserName</h1>
+        <p>Email:  @Model.Email</p>
+        <p>Phone:  @Model.PhoneNumber</p>
+        <table class="table">
+            <tr class="table-active text-white">
+                <td>Day Schedule</td>
+                <td>Exercises_Category</td>
+                <td>Exercises</td>
+                <td>Options_Exercise</td>
+                <td>Options_Schedule</td>
+            </tr>
+            @foreach (Schedule sch in ViewBag.Schedules)
+            {
+                <tr class="text-warning">
+                    <td>@sch.Day</td>
+                    <td>
+                        @foreach (var ex in sch.Exercises)
+                        {
+                            <ul>
+                                <li>@ex.ExerciseCategory: </li>
+                            </ul>
+                        }
+                    </td>
+                    <td>
+                        @foreach (var ex in sch.Exercises)
+                        {
+                            <p> - @ex.ExerciseName (Approach: @ex.CountApproach, Repeats: @ex.Repeats )</p>
+                        }
+                    </td>
+                    <td>
+                        @foreach (var ex in sch.Exercises)
+                        {
+                            <form asp-action="DeleteExercise" asp-controller="Exercise" asp-route-id="@ex.Id" method="post" style="margin: 7px; margin-left: 0">
+                                <a class="btn btn-sm btn-outline-info" asp-action="EditExercise" asp-controller="Exercise" asp-route-id="@ex.Id">Edit Exs</a>
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete Exs</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <form asp-action="DeleteSchedule" asp-controller="Schedule" asp-route-id="@sch.Id " method="post">
+                            <a class="btn btn-sm btn-primary" asp-action="EditSchedule" asp-controller="Schedule" asp-route-id="@sch.Id" asp-route-userid="@Model.Id">Edit</a>
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div>
+            <a class="btn btn-lg btn-primary btn-block" asp-action="CreateSchedule" asp-controller="Schedule" asp-route-id="@Model.Id">Create New Schedule</a>
+        </div>
+    </div>
+</body>

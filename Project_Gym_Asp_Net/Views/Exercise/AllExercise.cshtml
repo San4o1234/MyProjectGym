@@ -5,53 +5,53 @@
     ViewData["Title"] = "AllExercise";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body  style="background-image: url(https://lh3.googleusercontent.com/proxy/5vlYS8zzfrdrotWgJoRDtv-swWPOAL5Pw2emIFlZVVIGKeMZEzH5MLwkhGZ-HuD2kwZbrHbJ6MkB11OyZ6KSiNRgRE64W4AegjuLR8mSOdhA424); background-size: 100%">
+        <div class="container-fluid"><h1>All Exercises </h1></div>
+        <br />
+        <table class="table text-warning">
+            <thead>
+                <tr class="table-active text-light">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExerciseName)
+                    </th>
+                    <th>@Html.DisplayNameFor(model => model.CountApproach)</th>
+                    <th>@Html.DisplayNameFor(model => model.Repeats)</th>
+                    <th>@Html.DisplayNameFor(model => model.ExerciseCategory)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="font-weight:900;">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExerciseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CountApproach)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Repeats)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExerciseCategory)
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-outline-primary" asp-action="EditExercise" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="DeleteExercise" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<h1>All Exercises </h1>
-<hr />
-
-<table class="table table-hover">
-    <thead>
-        <tr class="table-active">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExerciseName)
-            </th>
-            <th>@Html.DisplayNameFor(model => model.CountApproach)</th>
-            <th>@Html.DisplayNameFor(model => model.Repeats)</th>
-            <th>@Html.DisplayNameFor(model => model.Category.CategoryName)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExerciseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountApproach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Repeats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td class="text-right">
-                <a class="btn btn-sm btn-outline-primary" asp-action="EditExercise" asp-route-id="@item.Id">Edit</a> 
-                <a class="btn btn-sm btn-outline-danger" asp-action="DeleteExercise" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-
-@*<div class="text-center">
-    <a class="btn btn-success btn-lg btn-block" href="@Url.Action("CreateExercise", "Exercise")">Add Exercise</a>
-</div>*@
-
+        <div class="text-center">
+            <a class="btn btn-success btn-lg btn-block" href="@Url.Action("CreateExercise", "Exercise")">Add Exercise</a>
+        </div>
+</body>

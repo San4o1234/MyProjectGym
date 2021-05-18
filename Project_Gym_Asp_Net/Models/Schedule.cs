@@ -10,10 +10,10 @@ namespace Project_Gym_Asp_Net.Models
         public int Id { get; set; }
         public string Day { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Exercise> Exercises{ get; set; }
         public Schedule()
         {
-            Categories = new List<Category>();
+            Exercises = new List<Exercise>();
         }
     }
 }

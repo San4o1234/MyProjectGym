@@ -13,6 +13,11 @@ namespace Project_Gym_Asp_Net.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        public IActionResult About_Us()
+        {
+            return View();
+        }
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;

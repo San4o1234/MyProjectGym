@@ -1,23 +1,32 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
-
-<h2>Role List</h2>
-<table class="table">
-    @foreach (var role in Model)
-    {
-        <tr>
-            <td>@role.Name</td>
-            <td>
-                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        Delete
-                    </button>
-                </form>
-            </td>
-        </tr>
-    }
-</table>
-<a asp-action="Create">Add Role</a>
-<a asp-action="UserList">User List</a>
-
+@{
+    ViewData["Title"] = "AllRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    
+<body style="background-image: url(https://cdn.thespaces.com/wp-content/uploads/2020/01/Gymshark-hero-crop.jpg);
+        background-size: 100%">
+    <div class="container">
+        <br />
+        <h2 class="text-center">Role List</h2>
+        <br />
+        <table class="table text-danger" style="font-weight: 900;">
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <a role="button" class="btn btn-lg btn-outline-success" asp-action="Create">Add Role</a>
+        <a role="button" class="btn btn-lg btn-outline-warning" asp-action="UserList">User List</a>
+    </div>
+</body>
 
 

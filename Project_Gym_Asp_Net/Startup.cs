@@ -39,7 +39,6 @@ namespace Project_Gym_Asp_Net
                opt.Password.RequireUppercase = false;
                opt.Password.RequireLowercase = false;
                opt.Password.RequireDigit = true;
-
                opt.User.RequireUniqueEmail = true;
            }).AddEntityFrameworkStores<MyContext>();
 

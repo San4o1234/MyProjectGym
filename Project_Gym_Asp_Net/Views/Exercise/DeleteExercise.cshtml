@@ -1,0 +1,48 @@
+﻿@model Project_Gym_Asp_Net.Models.Exercise
+
+@{
+    ViewData["Title"] = "DeleteExercise";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body style="background-image: url(https://lh3.googleusercontent.com/proxy/5vlYS8zzfrdrotWgJoRDtv-swWPOAL5Pw2emIFlZVVIGKeMZEzH5MLwkhGZ-HuD2kwZbrHbJ6MkB11OyZ6KSiNRgRE64W4AegjuLR8mSOdhA424);
+        background-size: 100%">
+    <div class="container justify-content-center">
+
+        <h1>DeleteExercise</h1>
+        <hr />
+        <div class="text-warning" style="font-weight:900;">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ExerciseName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ExerciseName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CountApproach)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CountApproach)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Repeats)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Repeats)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ExerciseCategory)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ExerciseCategory)
+                </dd>
+            </dl>
+
+            <form asp-action="DeleteExercise">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a class="btn btn-primary" asp-action="AllExercise">Back</a>
+            </form>
+        </div>
+    </div>
+<</body>>

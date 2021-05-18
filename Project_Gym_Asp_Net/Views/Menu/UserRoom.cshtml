@@ -1,0 +1,48 @@
+﻿@model Project_Gym_Asp_Net.Models.User
+@using Project_Gym_Asp_Net.Models
+@{
+    ViewData["Title"] = "UserRoom";
+}
+
+<body style="background-image: url(https://st.hzcdn.com/simgs/pictures/home-gyms/forma-design-forma-design-img~6e71e0f10eaae15b_4-8056-1-c6509f7.jpg);
+        background-size: 100%;
+    ">
+    <h2 class="text-center">User Room</h2>
+    <div class=" container text-warning">
+        <h6>User: @Model.UserName</h6>
+        <h6>Email: @Model.Email </h6>
+        <h6>Contact Phone: @Model.PhoneNumber</h6>
+        <a class="btn btn-lg btn-primary w-100" asp-action="ChangePassword" asp-controller="Users" asp-route-id="@Model.Id">Change Password</a>
+    </div>
+    <br />
+    <table class="table text-white" style="font-weight: 900;">
+        <tr class="table-active text-light">
+            <td>Day Schedule</td>
+            <td>Category</td>
+            <td>Exercises</td>
+        </tr>
+        @foreach (Schedule sch in ViewBag.Schedules)
+        {
+            <tr>
+                <td>@sch.Day</td>
+                <td>
+                    @foreach (Exercise ex in sch.Exercises.ToList())
+                    {
+                        <ul>
+                            <li>@ex.ExerciseCategory </li>
+                        </ul>
+                    }
+                </td>
+                <td>
+                    @foreach (Exercise ex in sch.Exercises.ToList())
+                    {
+                        <ul>
+                            <li>@ex.ExerciseName (Approach: @ex.CountApproach, Repeats: @ex.Repeats ) </li>
+                        </ul>
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+</body>

@@ -35,17 +35,6 @@ namespace Project_Gym_Asp_Net.Controllers
             if (ModelState.IsValid)
             {
 
-                //var user = await _userManager.FindByEmailAsync(model.Email);
-                //if (user != null)
-                //{
-                //    if (!await _userManager.IsEmailConfirmedAsync(user))
-                //    {
-                //        ModelState.AddModelError(string.Empty, "You do not confirmed email");
-                //        return View(model);
-                //    }
-                //}
-
-                // Login в identity подивитися як писати..
                 User user = await _userManager.FindByEmailAsync(model.Email);
                 var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
@@ -61,37 +50,11 @@ namespace Project_Gym_Asp_Net.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильний Логін або пароль.");
+                    ModelState.AddModelError("", "Wrong Login or Password");
                 }
             }
-            return RedirectToAction("AllUsers", "Admin");
-            //return View(model);
-        }
-
-        //public async Task<IActionResult> Login(LoginViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.FindByNameAsync(model.Email);
-        //        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-        //        if (result.Succeeded)
-        //        {
-        //            if(!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-        //            {
-        //                return Redirect(model.ReturnUrl);
-        //            }
-        //            else
-        //            {
-        //               return RedirectToAction("Index", "Home");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Wrong Something!");
-        //        }
-        //    }            
-        //    return View(model);
-        //}
+            return View(model);
+        }              
 
         [HttpPost]
         [ValidateAntiForgeryToken]

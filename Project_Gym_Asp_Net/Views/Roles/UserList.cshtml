@@ -1,15 +1,20 @@
 ﻿@model IEnumerable<Project_Gym_Asp_Net.Models.User>
 
-<h2>List Users</h2>
+<body style="background-image: url(https://cdn.thespaces.com/wp-content/uploads/2020/01/Gymshark-hero-crop.jpg);
+        background-size: 100%">
+    <div class="container" style="margin-top: 150px;">
 
-<table class="table">
-    @foreach (var user in Model)
-    {
-        <tr>
-            <td>@user.Email</td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
-            </td>
-        </tr>
-    }
-</table>
+        <h2>List Users</h2>
+        <table class="table text-warning">
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>    

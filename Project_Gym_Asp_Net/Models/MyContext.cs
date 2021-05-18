@@ -15,16 +15,7 @@ namespace Project_Gym_Asp_Net.Models
             Database.EnsureCreated();
         }
 
-        //public DbSet<User> Users { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Exercise> Exercises { get; set; }
-
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    builder.Entity<Schedule>().HasMany(s => s.Categories).WithMany(c => c.Schedules);
-
-        //    //base.OnModelCreating(builder);
-        //}
     }
 }

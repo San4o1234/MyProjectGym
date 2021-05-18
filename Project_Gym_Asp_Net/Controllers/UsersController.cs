@@ -11,7 +11,7 @@ using Project_Gym_Asp_Net.ViewModels;
 
 namespace Project_Gym_Asp_Net.Controllers
 {
-    [Authorize(Roles = "admin")]
+    
     public class UsersController : Controller
     {
         UserManager<User> userManager;
@@ -19,18 +19,14 @@ namespace Project_Gym_Asp_Net.Controllers
         {
             userManager = manager;
         }
-                
-        //public IActionResult AllUsers()
-        //{
-        //    return View(userManager.Users.ToList());
-        //}
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserViewModel model)
         {
@@ -52,7 +48,7 @@ namespace Project_Gym_Asp_Net.Controllers
             }
             return View(model);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -64,7 +60,7 @@ namespace Project_Gym_Asp_Net.Controllers
             EditUserViewModel editUser = new EditUserViewModel { Id = user.Id, Email = user.Email, UserName = user.UserName, Phone = user.PhoneNumber };
             return View(editUser);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewModel model)
         {
@@ -93,7 +89,19 @@ namespace Project_Gym_Asp_Net.Controllers
             }
             return View(model);
         }
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DetailsUser(string id)
+        {
+            User user = await userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Schedules = user.Schedules.ToList();
+            return View(user);
+        }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
@@ -105,6 +113,7 @@ namespace Project_Gym_Asp_Net.Controllers
             return RedirectToAction("AllUsers", "Admin");
         }
 
+        [Authorize(Roles = "admin, user")]
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
@@ -117,6 +126,7 @@ namespace Project_Gym_Asp_Net.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, user")]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -128,7 +138,15 @@ namespace Project_Gym_Asp_Net.Controllers
                     IdentityResult result = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("AllUsers", "Admin");
+                        if (User.IsInRole("admin"))
+                        {
+                            return RedirectToAction("AllUsers", "Admin");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        
                     }
                     else
                     {

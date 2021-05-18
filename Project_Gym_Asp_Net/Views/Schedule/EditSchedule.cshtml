@@ -1,0 +1,40 @@
+﻿@model Project_Gym_Asp_Net.Models.Schedule
+@using Project_Gym_Asp_Net.Models
+@{
+    ViewData["Title"] = "EditSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body style="background-image: url(http://www.glasgiven.com/site/wp-content/uploads/2017/09/PR-Better-Gym-Interior-3.jpg);
+        background-size: 100%">
+    <div class="container" style="margin-top: 10px;">
+        <h1>Edit Schedule</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form style="font-weight: 900;" asp-action="EditSchedule" asp-controller="Schedule">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="User.Id" name="userId" />
+                    <div class="form-group">
+                        <b><label asp-for="Day" class="control-label text-warning"></label></b>
+                        <input asp-for="Day" class="form-control" />
+                        <span asp-validation-for="Day" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Exercises" class="control-label text-warning"></label>
+                        <br />
+                        @foreach (Exercise e in ViewBag.Exercises)
+                        {
+                            <input type="checkbox" name="selectedExercises" value="@e.Id"
+                                   @(Model.Exercises.Contains(e) ? "checked=\"checked\"" : "") /> @e.ExerciseName <br />
+                            }
+                        <span asp-validation-for="Exercises" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-lg btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

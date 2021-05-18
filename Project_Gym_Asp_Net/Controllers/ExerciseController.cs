@@ -22,13 +22,8 @@ namespace Project_Gym_Asp_Net.Controllers
         }
     
         [HttpGet]
-        public IActionResult CreateExercise(int? id)
+        public IActionResult CreateExercise()
         {
-            if(id == null)
-            {
-                return RedirectToAction("AllExercise", "Exercise");
-            }
-            ViewBag.CategoryId = id;
             return View();
         }
     
@@ -37,7 +32,7 @@ namespace Project_Gym_Asp_Net.Controllers
         {
             if (ModelState.IsValid)
             {
-                Exercise ex = new Exercise { ExerciseName = exercise.ExerciseName, CountApproach = exercise.CountApproach, Repeats = exercise.Repeats, Category = context.Categories.Where(c => c.Id == exercise.Category.Id).First()};
+                Exercise ex = new Exercise { ExerciseName = exercise.ExerciseName, CountApproach = exercise.CountApproach, Repeats = exercise.Repeats, ExerciseCategory = exercise.ExerciseCategory};
                 context.Exercises.Add(ex);
                 context.SaveChanges();
                 return RedirectToAction("AllExercise", "Exercise");

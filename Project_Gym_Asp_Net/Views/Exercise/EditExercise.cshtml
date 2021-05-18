@@ -4,26 +4,43 @@
     ViewData["Title"] = "EditExercise";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>EditExercise</h1>
-
-<h4>Exercise</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditExercise">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ExerciseName" class="control-label"></label>
-                <input asp-for="ExerciseName" class="form-control" />
-                <span asp-validation-for="ExerciseName" class="text-danger"></span>
+<body style="background-image: url(https://lh3.googleusercontent.com/proxy/5vlYS8zzfrdrotWgJoRDtv-swWPOAL5Pw2emIFlZVVIGKeMZEzH5MLwkhGZ-HuD2kwZbrHbJ6MkB11OyZ6KSiNRgRE64W4AegjuLR8mSOdhA424);
+        background-size: 100%">
+    <div class="container justify-content-center">
+        <h1 class="text-center">Edit Exercise</h1>
+        <hr />
+        <div style="margin: 20px;" class="container justify-content-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <form class="text-warning" style="font-weight: 900;" asp-action="EditExercise" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="ExerciseName" class="control-label"></label>
+                            <input asp-for="ExerciseName" class="form-control" />
+                            <span asp-validation-for="ExerciseName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CountApproach" class="control-label"></label>
+                            <input asp-for="CountApproach" class="form-control" />
+                            <span asp-validation-for="CountApproach" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Repeats" class="control-label"></label>
+                            <input asp-for="Repeats" class="form-control" />
+                            <span asp-validation-for="Repeats" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ExerciseCategory" class="control-label"></label>
+                            <input asp-for="ExerciseCategory" class="form-control" />
+                            <span asp-validation-for="ExerciseCategory" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-success btn-block" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-
+</body>

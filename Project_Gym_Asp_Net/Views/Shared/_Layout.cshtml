@@ -6,12 +6,20 @@
     <title>@ViewData["Title"] - Project_Gym_Asp_Net</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>*@
+
 </head>
-<body>
+<body class="bg-dark">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sun_Gym</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <h2 class="float-md-start mb-2"><font style="vertical-align: inherit; color: orange">Sun_<span style="color: lawngreen">Gym</span></font></h2>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,33 +27,41 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About_Us"><b>About_Us</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AllUsers">All_Users</a>
+                            <a class="nav-link text-primary" asp-area="" asp-controller="Menu" asp-action="UserRoom"><b>User Room</b></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="AllRoles">All_Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="AllCategory">All_Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercise" asp-action="AllExercise">All_Exercise</a>
-                        </li>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="AllUsers"><b>User_List</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Roles" asp-action="AllRoles"><b>Roles</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Exercise" asp-action="AllExercise"><b>Exercises</b></a>
+                            </li>
+                        }
                     </ul>
                     <div class="text-end">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <p>@User.Identity.Name</p>
-
-                            <form method="post" asp-controller="Account" asp-action="Logout">
-                                <input type="submit" value="Выход" />
-                            </form>
+                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-0 justify-content-center mb-md-0">
+                                <li class="nav-link text-light">
+                                    <p><i><b>@User.Identity.Name</b></i></p>
+                                </li>
+                                <li class="nav-link text-light">
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <input type="submit" value="Logout" class="btn btn-warning" />
+                                    </form>
+                                </li>
+                            </ul>
                         }
                         else
                         {
-                            <a asp-controller="Account" asp-action="Login">Вход</a> 
+                            <a role="button" class="btn btn-light" asp-controller="Account" asp-action="Login">Login</a>
                         }
                     </div>
 
@@ -53,15 +69,17 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <main role="main" class="pb-3 text-light" >      
+        <div class="container-fluid">
             @RenderBody()
-        </main>
-    </div>
+        </div>
+    </main>
+    
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Project_Gym_Asp_Net - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-primary">
+        <div class="container-fluid">
+            2021 - Project_Gym_Asp_Net <span class="text-danger">~Alex_Maz Created~</span>
+            &copy; All rights reserved! <span class="text-white">@DateTime.Now.ToShortDateString()</span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
