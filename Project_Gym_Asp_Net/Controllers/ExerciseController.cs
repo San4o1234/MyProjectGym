@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Project_Gym_Asp_Net.Models;
 using Project_Gym_Asp_Net.ViewModels;
 
@@ -16,11 +17,26 @@ namespace Project_Gym_Asp_Net.Controllers
             context = cont;
         }
 
-        public IActionResult AllExercise()
+        public IActionResult AllExercise(Sorts sort = Sorts.ExerciseNameAsk)
         {
-            return View(context.Exercises.ToList());
+            //IQueryable<Exercise> exercises = context.Exercises.Include(e => e.ExerciseName);
+            var exercises = from ex in context.Exercises select ex;
+
+            ViewData["ExerciseSort"] = sort == Sorts.ExerciseNameAsk ? Sorts.ExerciseNameDesk : Sorts.ExerciseNameAsk;
+            exercises = sort switch
+            {
+                Sorts.ExerciseNameDesk => exercises.OrderByDescending(e => e.ExerciseName),
+                _ => exercises.OrderBy(e => e.ExerciseName)
+            };
+            return View(exercises.ToList());
         }
-    
+
+
+        //public IActionResult AllExercise()
+        //{
+        //    return View(context.Exercises.ToList());
+        //}
+
         [HttpGet]
         public IActionResult CreateExercise()
         {

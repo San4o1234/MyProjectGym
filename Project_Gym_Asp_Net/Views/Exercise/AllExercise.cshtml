@@ -15,7 +15,8 @@
                         @Html.DisplayNameFor(model => model.Id)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ExerciseName)
+                        <a asp-action="AllExercise" asp-route-sort="@ViewBag.ExerciseSort">ExerciseName</a>
+                        @*@Html.ActionLink("ExerciseName", "AllExercise", new { sort = ViewBag.ExerciseSort })*@
                     </th>
                     <th>@Html.DisplayNameFor(model => model.CountApproach)</th>
                     <th>@Html.DisplayNameFor(model => model.Repeats)</th>

@@ -23,14 +23,22 @@ namespace Project_Gym_Asp_Net.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> UserRoom()
+        public async Task<IActionResult> UserRoom(Sorts sortOrder = Sorts.DayAsk)
         {
             User user = await userManager.FindByNameAsync(User.Identity.Name);
             if(user == null)
             {
                 return NotFound();
             }
-            ViewData["Schedules"] = user.Schedules.ToList();
+
+            var schedulesDay = from s in user.Schedules select s;
+            ViewData["DaySort"] = sortOrder == Sorts.DayAsk ? Sorts.DayDesk : Sorts.DayAsk;
+            schedulesDay = sortOrder switch
+            {
+                Sorts.DayDesk => schedulesDay.OrderByDescending(s => s.Day),
+                _ => schedulesDay.OrderBy(s => s.Day)
+            };
+            ViewData["Schedules"] = schedulesDay.ToList();
 
             return View(user);
         }
